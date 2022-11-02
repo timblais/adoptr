@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>adoptr</title>
+    <link href="../public/css/output.css" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="navbar bg-base-100 bg-primary text-primary-content">
+            <div class="navbar-start">
+              <ul class="menu menu-horizontal p-0">
+                <li>
+                    <a>
+                        <img class="w-14 rounded-full" src="../public/imgs/dogAndCat.PNG">
+                    </a>
+                </li>
+              </ul>
+            </div>
+            <div class="navbar-center">
+                <a class="btn btn-ghost normal-case text-3xl">adoptr</a>
+            </div>
+            <div class="navbar-end">
+              <ul class="menu menu-horizontal p-0">
+                <li><a>Feed</a></li>
+                <li><a>Profile</a></li>
+                <li><a>Account</a></li>
+              </ul>
+            </div>
+          </div>
+    </nav>
+    
+
+    <section class="w-full flex justify-center m-4">
+        <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 rounded-lg">
+            <form class="card-body" action="/signup" method="POST">
+                <div class="form-control">
+                    <label class="label">
+                      <span class="label-text">Upload an Image</span>
+                    </label>
+                    <input type="file" name="fileUpload" class="file-input file-input-bordered w-full max-w-xs" />
+                </div>  
+                <div class="form-control">
+                    <label class="label">
+                    <span class="label-text">Title</span>
+                    </label>
+                    <input type="text" name="title" placeholder="Post Title" class="input input-bordered" />
+                </div>
+                <div class="form-control">
+                    <label class="label">
+                    <span class="label-text">Description</span>
+                    </label>
+                    <input type="text" name="description" placeholder="Post Description" class="input input-bordered" />
+                </div>
+                <div class="form-control mt-6">
+                    <input class="btn btn-primary" type="submit" value="Submit">
+                </div>
+            </form>
+          </div>
+    </section>
+    
+    
+</body>
+</html>
