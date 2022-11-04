@@ -10,7 +10,12 @@ const logger = require('morgan')
 const connectDB = require('./config/database')
 
 //Route Variables
-const mainRoutes = require('./routes/index.js')
+const indexRoutes = require('./routes/index.js')
+const signUpRoutes = require('./routes/signUp.js')
+const loginRoutes = require('./routes/login.js')
+const feedRoutes = require('./routes/feed.js')
+const profileRoutes = require('./routes/profile.js')
+const newPostRoutes = require('./routes/newPost.js')
 
 
 // .ENV setup
@@ -49,6 +54,11 @@ app.use(flash())
 
 // Routes
 app.use('/', indexRoutes)
+app.use('/signUp', signUpRoutes)
+// app.use('/login', loginRoutes)
+// app.use('/feed', feedRoutes)
+// app.use('/profile', profileRoutes)
+// app.use('/newPost', newPostRoutes)
 
 app.listen(process.env.PORT, ()=>{
     console.log('Server is running, you better catch it!')
