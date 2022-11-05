@@ -58,8 +58,8 @@ app.use('/', indexRoutes)
 app.use('/signUp', signUpRoutes)
 app.use('/login', loginRoutes)
 // app.use('/logout', logoutRoutes)
-// app.use('/feed', feedRoutes)
-// app.use('/profile', profileRoutes)
+app.use('/feed', feedRoutes)
+app.use('/profile', profileRoutes)
 app.use('/newPost', newPostRoutes)
 
 app.listen(process.env.PORT, ()=>{
