@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const User = require('../models/User');
 
 
 module.exports = {
@@ -27,6 +28,18 @@ module.exports = {
       console.log(err);
     }
   },
+
+  getPost: async (req, res) => {
+    try {
+      const posts = await Post.find({ _id: req.params.id });
+      const users = await User.find({ _id: posts[0].user });
+      console.log(users)
+      res.render("post.ejs", { posts: posts, user: req.user, users: users });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
   likePost: async (req, res) => {
     try {
       await Post.findOneAndUpdate(

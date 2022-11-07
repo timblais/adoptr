@@ -17,6 +17,7 @@ const logoutRoutes = require('./routes/logout.js')
 const feedRoutes = require('./routes/feed.js')
 const profileRoutes = require('./routes/profile.js')
 const newPostRoutes = require('./routes/newPost.js')
+const postRoutes = require('./routes/post.js')
 
 
 // .ENV setup
@@ -61,6 +62,7 @@ app.use('/login', loginRoutes)
 app.use('/feed', feedRoutes)
 app.use('/profile', profileRoutes)
 app.use('/newPost', newPostRoutes)
+app.use('/post', postRoutes)
 
 app.listen(process.env.PORT, ()=>{
     console.log('Server is running, you better catch it!')
