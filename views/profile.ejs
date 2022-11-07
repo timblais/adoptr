@@ -37,17 +37,19 @@
         
         <ul class="w-11/12 md:w-8/12 pt-4 flex-col justify-center items-center"  >
             <% posts.forEach(e => { %>
-                <% let thisUser = users.filter(x => x._id == e.user)%>
                 <li class="card sm:card-side bg-base-100 shadow-xl m-4 w-11/12">
-                    <a href="/post/e._id%>">
+                    <a href="/post/<%=e._id%>">
                         <figure><img src="<%=e.image%>" alt="postImage"/></figure>
                         <div class="card-body">
                           <h2 class="card-title"><%=e.title%></h2>
                           <p><%=e.caption%></p>
-                          <span>
-                            <a href="/profile/e.user"><%=thisUser[0].userName%></a>
-                          </span>
-                          
+                          <% users.forEach(u => { %>
+                            <% if (e.user == u.id) { %>
+                              <span>
+                                <a href="/profile/<%=e.user%>"><%=u.userName%></a>
+                              </span>
+                            <% } %>
+                          <% }) %>
                         </div>
                     </a>
                 </li>

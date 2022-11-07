@@ -5,7 +5,7 @@ const Post = require("../models/Post");
 module.exports = {
   
     getNewPost: (req,res)=>{
-        res.render('newPost.ejs')
+        res.render('newPost.ejs', {user: req.user})
     },
   
     createNewPost: async (req, res) => {
@@ -22,7 +22,7 @@ module.exports = {
         user: req.user.id,
       });
       console.log("Post has been added!");
-      res.redirect("/profile");
+      res.redirect(`/profile/${req.user._id}`);
     } catch (err) {
       console.log(err);
     }
