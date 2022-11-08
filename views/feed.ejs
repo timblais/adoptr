@@ -50,6 +50,22 @@
                             </span>
                           <% } %>
                         <% }) %>
+                        <ul>
+                          <% comments.forEach(el => { %>
+                              <% if(el.postId == e._id){ %>
+                                  <li>
+                                    <% users.forEach(u => { %>
+                                      <% if (el.user == u.id) { %>
+                                        <span>
+                                          <a href="/profile/<%=e.user%>"><%=u.userName%></a>
+                                        </span>
+                                      <% } %>
+                                    <% }) %>
+                                      <span><%=el.text%></span>
+                                  </li>
+                              <% } %>
+                          <% }) %>
+                        </ul>
                       </div>
                   </a>
               </li>
