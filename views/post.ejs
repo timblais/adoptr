@@ -36,6 +36,7 @@
     <section class="w-full flex justify-center">
         
       <ul class="w-11/12 md:w-8/12 pt-4 flex-col justify-center items-center"  >
+          <!-- Pull in post and general post info -->
           <% posts.forEach(e => { %>
               <li class="card sm:card-side bg-base-100 shadow-xl m-4 w-11/12">
                   <a href="/post/<%=e._id%>">
@@ -50,6 +51,26 @@
                             </span>
                           <% } %>
                         <% }) %>
+                        <!-- Pull in Likes and use Like button -->
+                        <div> 
+                          <% if (e.likes.length == 1) { %>
+                            <span>Be the first to like this post!</span>
+                          <% } else if(e.likes.length == 2) { %>
+                            <span><%=e.likes[1]%> likes this!</span>
+                          <% } else if(e.likes.length == 3) { %>
+                            <span><%=e.likes[1]%> and <%=e.likes[2]%> like this!</span>
+                          <% } else { %>
+                            <span><%=e.likes[1]%>, <%=e.likes[2]%>, and <%=e.likes.length - 3%> others like this!</span>
+                          <% } %>
+                        </div>
+                        <% let liked = 'notLiked' %>
+                        <% if (e.likes.includes(user.userName)){ %>
+                          <%liked = 'liked'%>
+                        <% } %>
+                        <div data-id="<%=e._id%>">
+                          <button class="likeButton <%=liked%>"></button>
+                        </div>
+                        <!-- Pull in comments and add a new comment -->
                         <ul>
                           <% comments.forEach(el => { %>
                               <% if(el.postId == e._id){ %>
@@ -78,7 +99,7 @@
       </ul>
   </section>
    
-    
+  <script src="../../js/main.js"></script>
     
 </body>
 </html>
