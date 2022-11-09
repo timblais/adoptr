@@ -44,27 +44,38 @@ module.exports = {
 
   likePost: async (req, res)=>{
     try{
-        await Post.findOneAndUpdate({_id:req.body.itemIdFromJSFile},{
-            $push: {likes: req.user.userName}
+      const thisPost = await Post.findOne({_id:req.body.postIdFromJSFile});  
+      if(thisPost.likes.includes(req.user.userName)){
+        await Post.findOneAndUpdate({_id:req.body.postIdFromJSFile},{
+          $pull: {likes: req.user.userName}
+        })
+        console.log('unLiked Post')
+        res.json('unLiked Post')
+      }else{
+        await Post.findOneAndUpdate({_id:req.body.postIdFromJSFile},{
+          $push: {likes: req.user.userName}
         })
         console.log('Liked Post')
         res.json('Liked Post')
+      }
+
+      
     }catch(err){
         console.log(err)
     }
 },
-  deletePost: async (req, res) => {
-    try {
-      // Find post by id
-      let post = await Post.findById({ _id: req.params.id });
-      // Delete image from cloudinary
-      await cloudinary.uploader.destroy(post.cloudinaryId);
-      // Delete post from db
-      await Post.remove({ _id: req.params.id });
-      console.log("Deleted Post");
-      res.redirect("/profile");
-    } catch (err) {
-      res.redirect("/profile");
-    }
-  },
+  // deletePost: async (req, res) => {
+  //   try {
+  //     // Find post by id
+  //     let post = await Post.findById({ _id: req.params.id });
+  //     // Delete image from cloudinary
+  //     await cloudinary.uploader.destroy(post.cloudinaryId);
+  //     // Delete post from db
+  //     await Post.remove({ _id: req.params.id });
+  //     console.log("Deleted Post");
+  //     res.redirect("/profile");
+  //   } catch (err) {
+  //     res.redirect("/profile");
+  //   }
+  // },
 };
