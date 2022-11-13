@@ -35,21 +35,40 @@ async function likePost(){
 }
 
 // Image preview/cropping:
+
+//Grabs elements for the uploaded image and container
 const selectedFile = document.getElementById('imageUpload')
 const imageContainer = document.getElementById('imagePreview')
 
+// on change(selecting an image to upload), run displayImage()
 selectedFile.addEventListener('change', displayImage, false)
 
 function displayImage(){
-    const file = this.files[0];
+    const file = this.files[0]; // grabs file
     
-    const img = document.createElement('img')
+    const img = document.createElement('img') 
     img.classList.add('preview')
+    img.setAttribute('id', 'cropperPreview')
     img.file = file
     imageContainer.appendChild(img)
 
     const reader = new FileReader();
     reader.onload = (e) => { img.src = e.target.result; };
     reader.readAsDataURL(file);
-
 }
+
+import Cropper from 'cropperjs';
+
+const image = document.getElementById('cropperPreview');
+const cropper = new Cropper(image, {
+  aspectRatio: 4 / 5,
+  crop(event) {
+    console.log(event.detail.x);
+    console.log(event.detail.y);
+    console.log(event.detail.width);
+    console.log(event.detail.height);
+    console.log(event.detail.rotate);
+    console.log(event.detail.scaleX);
+    console.log(event.detail.scaleY);
+  },
+});
