@@ -33,3 +33,23 @@ async function likePost(){
         console.log(err)
     }
 }
+
+// Image preview/cropping:
+const selectedFile = document.getElementById('imageUpload')
+const imageContainer = document.getElementById('imagePreview')
+
+selectedFile.addEventListener('change', displayImage, false)
+
+function displayImage(){
+    const file = this.files[0];
+    
+    const img = document.createElement('img')
+    img.classList.add('preview')
+    img.file = file
+    imageContainer.appendChild(img)
+
+    const reader = new FileReader();
+    reader.onload = (e) => { img.src = e.target.result; };
+    reader.readAsDataURL(file);
+
+}
