@@ -1,3 +1,5 @@
+// import Cropper from '../cropper.js';
+
 const likeButton = document.querySelectorAll('.likeButton')
 
 const notLiked = document.querySelectorAll('.notLiked')
@@ -39,6 +41,7 @@ async function likePost(){
 //Grabs elements for the uploaded image and container
 const selectedFile = document.getElementById('imageUpload')
 const imageContainer = document.getElementById('imagePreview')
+let cropper
 
 // on change(selecting an image to upload), run displayImage()
 selectedFile.addEventListener('change', displayImage, false)
@@ -51,24 +54,41 @@ function displayImage(){
     img.setAttribute('id', 'cropperPreview')
     img.file = file
     imageContainer.appendChild(img)
+    const image = document.getElementById('cropperPreview')
+
 
     const reader = new FileReader();
-    reader.onload = (e) => { img.src = e.target.result; };
+    reader.onload = (e) => { 
+        img.src = e.target.result; 
+        cropper = new Cropper(image, {
+              aspectRatio: 4 / 5,
+              crop(event) {
+                console.log(event.detail.x);
+                console.log(event.detail.y);
+                console.log(event.detail.width);
+                console.log(event.detail.height);
+                console.log(event.detail.rotate);
+                console.log(event.detail.scaleX);
+                console.log(event.detail.scaleY);
+              },
+            });
+
+    };
     reader.readAsDataURL(file);
 }
 
-import Cropper from 'cropperjs';
 
-const image = document.getElementById('cropperPreview');
-const cropper = new Cropper(image, {
-  aspectRatio: 4 / 5,
-  crop(event) {
-    console.log(event.detail.x);
-    console.log(event.detail.y);
-    console.log(event.detail.width);
-    console.log(event.detail.height);
-    console.log(event.detail.rotate);
-    console.log(event.detail.scaleX);
-    console.log(event.detail.scaleY);
-  },
-});
+
+// const image = document.getElementById('dog');
+// const cropper = new Cropper(image, {
+//   aspectRatio: 0,
+//   crop(event) {
+//     console.log(event.detail.x);
+//     console.log(event.detail.y);
+//     console.log(event.detail.width);
+//     console.log(event.detail.height);
+//     console.log(event.detail.rotate);
+//     console.log(event.detail.scaleX);
+//     console.log(event.detail.scaleY);
+//   },
+// });
