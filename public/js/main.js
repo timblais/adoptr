@@ -78,17 +78,31 @@ function displayImage(){
 }
 
 
+// New create post function with fetch:
 
-// const image = document.getElementById('dog');
-// const cropper = new Cropper(image, {
-//   aspectRatio: 0,
-//   crop(event) {
-//     console.log(event.detail.x);
-//     console.log(event.detail.y);
-//     console.log(event.detail.width);
-//     console.log(event.detail.height);
-//     console.log(event.detail.rotate);
-//     console.log(event.detail.scaleX);
-//     console.log(event.detail.scaleY);
-//   },
-// });
+const newPostSubmit = document.getElementById('newPostSubmit')
+
+newPostSubmit.addEventListener('click', createPost)
+
+async function createPost(){
+    const postTitle = document.getElementById('title').value
+    const postCaption = document.getElementById('caption').value
+    const postImage = cropper.getCroppedCanvas().toDataURL('image/jpeg')
+
+    try{
+        const response = await fetch('/newPost', {
+            method: 'POST',
+            headers: {'Content-type': 'application/json'},
+            body: JSON.stringify({
+                'postTitle': postTitle,
+                'postCaption': postCaption,
+                'postImage': postImage,
+            })
+        })
+        const data = await response.json()
+        console.log(data)
+        window.location.replace('/feed')
+    }catch(err){
+        console.log(err)
+    }
+}
