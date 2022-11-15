@@ -11,24 +11,24 @@ module.exports = {
     },
   
     createNewPost: async (req, res) => {
-    try {
-      // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
-
-      await Post.create({
-        title: req.body.title,
-        image: result.secure_url,
-        cloudinaryId: result.public_id,
-        caption: req.body.caption,
-        likes: 0,
-        user: req.user.id,
-      });
-      console.log("Post has been added!");
-      res.redirect(`/profile/${req.user._id}`);
-    } catch (err) {
-      console.log(err);
-    }
-  },
+      try {
+        // Upload image to cloudinary
+        const result = await cloudinary.uploader.upload(req.body.postImage);
+    
+        await Post.create({
+          title: req.body.postTitle,
+          image: result.secure_url,
+          cloudinaryId: result.public_id,
+          caption: req.body.postCaption,
+          likes: 0,
+          user: req.user.id,
+        });
+        console.log("Post has been added!");
+        res.json('Post has been added!');
+      } catch (err) {
+        console.log(err);
+      }
+    },
 
   getPost: async (req, res) => {
     try {
@@ -79,3 +79,24 @@ module.exports = {
   //   }
   // },
 };
+
+// CreatePost alt:
+createNewPost: async (req, res) => {
+  try {
+    // Upload image to cloudinary
+    const result = await cloudinary.uploader.upload(req.body.postImage);
+
+    await Post.create({
+      title: req.body.postTitle,
+      image: result.secure_url,
+      cloudinaryId: result.public_id,
+      caption: req.body.postCaption,
+      likes: 0,
+      user: req.user.id,
+    });
+    console.log("Post has been added!");
+    res.redirect(`/profile/${req.user._id}`);
+  } catch (err) {
+    console.log(err);
+  }
+}
