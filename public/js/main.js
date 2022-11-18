@@ -1,5 +1,15 @@
 // import Cropper from '../cropper.js';
 
+const mobileMenuButton = document.getElementById('mobileMenuButton')
+const mobileMenu = document.getElementById('mobileMenu')
+
+mobileMenuButton.addEventListener('click', openCloseMenu)
+
+function openCloseMenu(){
+    mobileMenuButton.classList.toggle('open')
+    mobileMenu.classList.toggle('hidden')
+}
+
 const likeButton = document.querySelectorAll('.likeButton')
 
 
@@ -96,3 +106,5 @@ async function createPost(){
         console.log(err)
     }
 }
+
+
