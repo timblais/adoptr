@@ -23,13 +23,30 @@
             <div class="navbar-center">
                 <a href ="/feed" class="btn btn-ghost normal-case text-3xl">adoptr</a>
             </div>
-            <div class="navbar-end">
+            <!-- Mobile nav menu button view (closed) -->
+            <div class="md:hidden navbar-end flex items-center">
+              <button id="mobileMenuButton" class="mr-4 flex justify-center items-center">
+                <span class="material-symbols-outlined text-2xl">
+                  menu
+                </span>
+              </button>
+            </div>
+            <!-- Desktop nav menu view -->
+            <div class="hidden md:flex navbar-end">
               <ul class="menu menu-horizontal p-0">
                 <li><a href ="/feed">Feed</a></li>
                 <li><a href ="/newPost">New Post</a></li>
                 <li><a href ="/profile/<%=user._id%>">Profile</a></li>
               </ul>
             </div>
+          </div>
+          <!-- Mobile nav menu (open) -->
+          <div id="mobileMenu" class="hidden navbar bg-base-100 bg-primary text-primary-content md:hidden justify-end">
+            <ul class="menu menu-vertical p-0 flex items-end justify-end">
+              <li><a href ="/feed">Feed</a></li>
+              <li><a href ="/newPost">New Post</a></li>
+              <li><a href ="/profile/<%=user._id%>">Profile</a></li>
+            </ul>
           </div>
     </nav>
     
